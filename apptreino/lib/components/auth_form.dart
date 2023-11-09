@@ -44,7 +44,7 @@ class _AuthFormState extends State<AuthForm> {
       id: '1',
       name: _formData.name,
       email: _formData.email,
-      ImageURL: '1',
+      imageURL: '1',
     );
 
     widget.onSubmit(_formData);
@@ -70,6 +70,10 @@ class _AuthFormState extends State<AuthForm> {
               key: _formKey,
               child: Column(
                 children: [
+                  if (_formData.isSignup)
+                    UserImagePicker(
+                      onImagePick: _handleImagePick,
+                    ),
                   if (_formData.isSignup)
                     TextFormField(
                       key: const ValueKey('name'),

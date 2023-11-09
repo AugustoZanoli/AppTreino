@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "393082906792",
+    "project_id": "pomodoroapp-22a6a",
+    "storage_bucket": "pomodoroapp-22a6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:393082906792:android:e16bd429edd30630583a9d",
+        "android_client_info": {
+          "package_name": "br.com.zanoli.apptreino"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBsY0Hsv61xl8CQ1UVJ8iqQFQw2JHG1WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
