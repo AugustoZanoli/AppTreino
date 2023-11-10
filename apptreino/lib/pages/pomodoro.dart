@@ -13,43 +13,52 @@ class Pomodoro extends StatelessWidget {
     final store = Provider.of<PomodoroStore>(context);
 
     return Scaffold(
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Cronometro(),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40),
-          child: Observer(
-            builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                EntradaTempo(
-                  valor: store.tempoTrabalho,
-                  titulo: 'Trabalho',
-                  inc: store.iniciado && store.estaTrabalhando()
-                      ? null
-                      : store.incrementarTempoTrabalho,
-                  dec: store.iniciado && store.estaTrabalhando()
-                      ? null
-                      : store.decrementarTempoTrabalho,
-                ),
-                EntradaTempo(
-                  valor: store.tempoDescanso,
-                  titulo: 'Descanso',
-                  inc: store.iniciado && store.estaDescansando()
-                      ? null
-                      : store.incrementarTempoDescanso,
-                  dec: store.iniciado && store.estaDescansando()
-                      ? null
-                      : store.decrementarTempoDescanso,
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text('Pomodoro'),
+          titleTextStyle: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
-      ],
-    ));
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Cronometro(),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: Observer(
+                builder: (_) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    EntradaTempo(
+                      valor: store.tempoTrabalho,
+                      titulo: 'Trabalho',
+                      inc: store.iniciado && store.estaTrabalhando()
+                          ? null
+                          : store.incrementarTempoTrabalho,
+                      dec: store.iniciado && store.estaTrabalhando()
+                          ? null
+                          : store.decrementarTempoTrabalho,
+                    ),
+                    EntradaTempo(
+                      valor: store.tempoDescanso,
+                      titulo: 'Descanso',
+                      inc: store.iniciado && store.estaDescansando()
+                          ? null
+                          : store.incrementarTempoDescanso,
+                      dec: store.iniciado && store.estaDescansando()
+                          ? null
+                          : store.decrementarTempoDescanso,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
