@@ -14,10 +14,10 @@ class Pomodoro extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.purple.shade900,
           title: Text('Pomodoro'),
           titleTextStyle: TextStyle(
-            color: Colors.red,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
             fontSize: 20,
           ),

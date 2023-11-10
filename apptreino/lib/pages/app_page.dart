@@ -1,6 +1,6 @@
 import 'package:apptreino/core/services/auth_service.dart';
 import 'package:apptreino/pages/afazeres_page.dart';
-import 'package:audioplayers/audioplayers.dart';
+
 import 'package:apptreino/pages/pomodoro.dart';
 import 'package:apptreino/pages/story_page.dart';
 import 'package:flutter/material.dart';

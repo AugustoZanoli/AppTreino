@@ -37,7 +37,8 @@ class EntradaTempo extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 shape: CircleBorder(),
                 padding: EdgeInsets.all(15),
-                primary: store.estaTrabalhando() ? Colors.red : Colors.green,
+                primary:
+                    store.estaTrabalhando() ? Colors.purple : Colors.blueAccent,
               ),
             ),
             Text(

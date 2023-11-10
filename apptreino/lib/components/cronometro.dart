@@ -13,7 +13,9 @@ class Cronometro extends StatelessWidget {
 
     return Observer(builder: (_) {
       return Container(
-        color: store.estaTrabalhando() ? Colors.red : Colors.green,
+        color: store.estaTrabalhando()
+            ? Colors.purple.shade600
+            : Colors.blueAccent,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
