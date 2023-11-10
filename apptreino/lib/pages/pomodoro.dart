@@ -13,35 +13,52 @@ class Pomodoro extends StatelessWidget {
     final store = Provider.of<PomodoroStore>(context);
 
     return Scaffold(
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          child: Cronometro(),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 40),
-          child: Observer(
-            builder: (_) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                EntradaTempo(
-                  valor: store.tempoTrabalho,
-                  titulo: 'Trabalho',
-                  inc: store.incrementarTempoTrabalho,
-                  dec: store.decrementarTempoTrabalho,
-                ),
-                EntradaTempo(
-                  valor: store.tempoDescanso,
-                  titulo: 'Descanso',
-                  inc: store.incrementarTempoDescanso,
-                  dec: store.decrementarTempoDescanso,
-                ),
-              ],
-            ),
+        appBar: AppBar(
+          backgroundColor: Colors.purple.shade900,
+          title: Text('Pomodoro'),
+          titleTextStyle: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
           ),
         ),
-      ],
-    ));
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: Cronometro(),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 40),
+              child: Observer(
+                builder: (_) => Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    EntradaTempo(
+                      valor: store.tempoTrabalho,
+                      titulo: 'Trabalho',
+                      inc: store.iniciado && store.estaTrabalhando()
+                          ? null
+                          : store.incrementarTempoTrabalho,
+                      dec: store.iniciado && store.estaTrabalhando()
+                          ? null
+                          : store.decrementarTempoTrabalho,
+                    ),
+                    EntradaTempo(
+                      valor: store.tempoDescanso,
+                      titulo: 'Descanso',
+                      inc: store.iniciado && store.estaDescansando()
+                          ? null
+                          : store.incrementarTempoDescanso,
+                      dec: store.iniciado && store.estaDescansando()
+                          ? null
+                          : store.decrementarTempoDescanso,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }

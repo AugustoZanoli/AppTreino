@@ -42,24 +42,59 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade900,
-      body: Stack(
-        children: [
-          Center(
-            child: SingleChildScrollView(
-              child: AuthForm(
-                onSubmit: _handleSubmit,
-              ),
-            ),
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            colors: [
+              Colors.purple.shade900,
+              Colors.purple.shade700,
+              Colors.purple.shade400,
+            ],
           ),
-          if (_isLoading)
-            Container(
-              decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
-              child: Center(
-                child: CircularProgressIndicator(),
+        ),
+        child: Stack(
+          children: [
+            // Align(
+            //   alignment: Alignment.topCenter,
+            //   child: Container(
+            //     height: 500,
+            //     decoration: BoxDecoration(
+            //       image: DecorationImage(
+            //         image: AssetImage(
+            //             'assets/images/undraw_moonlight_5ksn (1).png'),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/fundo 2 (1).png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
               ),
             ),
-        ],
+            Center(
+              child: SingleChildScrollView(
+                child: AuthForm(
+                  onSubmit: _handleSubmit,
+                ),
+              ),
+            ),
+            if (_isLoading)
+              Container(
+                decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.5)),
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
