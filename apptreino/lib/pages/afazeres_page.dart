@@ -62,6 +62,7 @@ class _AfazeresPageState extends State<AfazeresPage> {
 
     setState(() {
       _Afazeress.add(newAfazeres);
+      _allAfazeress = List.from(_Afazeress);
     });
 
     Navigator.of(context).pop();
@@ -98,6 +99,33 @@ class _AfazeresPageState extends State<AfazeresPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    // Aqui você pode buscar os dados novamente sempre que a dependência (os dados) mudar
+    fetchData();
+  }
+
+  void fetchData() async {
+    // Adapte este código conforme necessário para buscar os dados do Firestore
+    final tasksCollection = FirebaseFirestore.instance.collection('tasks');
+    final data = await tasksCollection.get();
+
+    setState(() {
+      _Afazeress = data.docs
+          .map((doc) => Afazeres(
+                id: doc.id,
+                titulo: doc['name'],
+                data: (doc['date'] as Timestamp).toDate(),
+                categoria: doc['category'],
+              ))
+          .toList();
+
+      _allAfazeress = List.from(_Afazeress);
+    });
+  }
+
+  @override
   void initState() {
     super.initState();
     _allAfazeress = _Afazeress; // Inicialize _allAfazeress com a lista original
@@ -110,7 +138,7 @@ class _AfazeresPageState extends State<AfazeresPage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade900,
+        backgroundColor: Colors.purple.shade900,
         title: Text('Minha Lista de Afazeres'),
         titleTextStyle: TextStyle(
           color: Colors.white,
@@ -122,7 +150,7 @@ class _AfazeresPageState extends State<AfazeresPage> {
             child: DropdownButton(
               icon: Icon(
                 Icons.more_vert,
-                color: Theme.of(context).primaryIconTheme.color,
+                color: Colors.white,
               ),
               items: [
                 DropdownMenuItem(
@@ -152,64 +180,50 @@ class _AfazeresPageState extends State<AfazeresPage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Card(
-              color: Colors.grey.shade900,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment
-                      .spaceBetween, // Coloca os elementos no canto direito e esquerdo
-                  children: [
-                    Row(
-                      children: [
-                        // Aqui você pode exibir a imagem do usuário (se disponível)
-                        if (currentUser != null)
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(currentUser
-                                .imageURL), // Carregue a imagem a partir da URL
-                            radius:
-                                25, // Ajuste o tamanho do avatar conforme necessário
-                          ),
-
-                        // Nome e e-mail do usuário
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Olá, ${currentUser?.name ?? 'Usuário'}!',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'E-mail: ${currentUser?.email ?? ''}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+      body: Stack(
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/fundoafazeres.png'),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
+          ),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Card(
+                  color: Colors.grey.shade900.withOpacity(0.1),
+                  child: Text(
+                    'Adicione seus afazeres! Lembre-se, uma rotina sáudavel representa uma vida sáudavel!',
+                    style: TextStyle(
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontFamily: 'Nunito', // Exemplo de uma fonte diferente
+                      shadows: [
+                        Shadow(
+                          color: Colors.black,
+                          blurRadius: 2,
+                          offset: Offset(1, 1),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
 
-            AfazeresList(_Afazeress, _removeAfazeres),
-            // Por exemplo, sua lista de afazeres
-          ],
-        ),
+                AfazeresList(_Afazeress, _removeAfazeres),
+                // Por exemplo, sua lista de afazeres
+              ],
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey.shade300,

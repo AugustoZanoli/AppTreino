@@ -13,6 +13,7 @@ void main() async {
         Provider<PomodoroStore>(
           create: (_) => PomodoroStore(),
         ),
+
         // Adicione outros providers, se necessário
       ],
       child: MyApp(),

@@ -1,10 +1,9 @@
 import 'package:apptreino/core/services/auth_service.dart';
 import 'package:apptreino/pages/afazeres_page.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:apptreino/pages/pomodoro.dart';
-import 'package:apptreino/store/contador.store.dart';
-import 'package:apptreino/store/pomodoro.store.dart';
+import 'package:apptreino/pages/story_page.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AppPage extends StatelessWidget {
   const AppPage({Key? key});
@@ -95,6 +94,7 @@ class AppPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
             ),
@@ -117,64 +117,132 @@ class AppPage extends StatelessWidget {
         ),
         drawer: Drawer(
           child: Container(
-            color: Color.fromRGBO(0, 0, 0, 0.6),
-            child: ListView(
-              children: [
-                ListTile(
-                  title: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Icon(
-                        Icons.access_alarm,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Pomodoro',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
+            decoration: BoxDecoration(
+              color: Colors.purple.shade900.withOpacity(0.8),
+              image: DecorationImage(
+                image: AssetImage('assets/images/fundolateral.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              color: Colors.blue.withOpacity(0.4),
+              child: ListView(
+                children: [
+                  ListTile(
+                    title: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Icon(
+                          Icons.access_alarm,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Pomodoro',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Pomodoro(),
+                        ),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Pomodoro(),
-                      ),
-                    );
-                  },
-                ),
-                ListTile(
-                  title: Row(
-                    children: [
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Icon(
-                        Icons.notes,
-                        size: 30,
-                        color: Colors.black,
-                      ),
-                      SizedBox(width: 16),
-                      Text(
-                        'Afazeres',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ],
+                  ListTile(
+                    title: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Icon(
+                          Icons.notes,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Afazeres',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AfazeresPage(),
+                        ),
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AfazeresPage(),
-                      ),
-                    );
-                  },
-                ),
-              ],
+                  ListTile(
+                    title: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Icon(
+                          Icons.menu_book_rounded,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Leituras',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StoryPage(),
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    title: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                        ),
+                        Icon(
+                          Icons.water_damage_outlined,
+                          size: 30,
+                          color: Colors.white,
+                        ),
+                        SizedBox(width: 16),
+                        Text(
+                          'Água',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
         ),
